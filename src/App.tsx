@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Products from './pages/Products/Products';
 import Profile from './pages/Profile/Profile';
 import Settings from './pages/Settings/Settings';
+import AnalyticsWrapper from './components/AnalyticsWrapper';
 import './App.scss';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           </Routes>
         </Layout>
       </Router>
+      <AnalyticsWrapper />
     </div>
   );
 }
