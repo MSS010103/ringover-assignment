@@ -146,8 +146,7 @@ const Products = () => {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [uploadedPhoto, setUploadedPhoto] = useState<string | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
@@ -166,12 +165,12 @@ const Products = () => {
   };
 
   const handleAddProduct = () => {
-    setEditingProduct(null);
+    setSelectedProduct(null);
     setIsModalOpen(true);
   };
 
   const handleEditProduct = (product: Product) => {
-    setEditingProduct(product);
+    setSelectedProduct(product);
     setIsModalOpen(true);
   };
 
@@ -181,100 +180,17 @@ const Products = () => {
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
+    if (file && selectedProduct) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedPhoto(reader.result as string);
+        setSelectedProduct({
+          ...selectedProduct,
+          icon: reader.result as string
+        });
       };
       reader.readAsDataURL(file);
     }
   };
-
-  const handlePhotoDelete = () => {
-    setUploadedPhoto(null);
-  };
-
-  const columns = [
-    {
-      key: 'checkbox',
-      render: (record: Product) => (
-        <div className="column checkbox">
-          <input 
-            type="checkbox"
-            checked={selectedProducts.includes(record.id)}
-            onChange={(e) => handleSelectProduct(record.id, e.target.checked)}
-          />
-        </div>
-      ),
-    },
-    {
-      key: 'name',
-      title: 'Product Name',
-      render: (record: Product) => (
-        <div className="column name">
-          <img src={record.icon} alt={record.name} className="product-icon" />
-          <div className="product-info">
-            <span className="product-name">{record.name}</span>
-            <span className="product-description">{record.description}</span>
-          </div>
-        </div>
-      ),
-    },
-    {
-      key: 'category',
-      title: 'Category',
-      render: (record: Product) => (
-        <div className="column category">{record.category}</div>
-      ),
-    },
-    {
-      key: 'price',
-      title: 'Price',
-      render: (record: Product) => (
-        <div className="column price">${record.price}</div>
-      ),
-    },
-    {
-      key: 'company',
-      title: 'Company',
-      render: (record: Product) => (
-        <div className="column company">
-          <img src={record.company.logo} alt={record.company.name} className="company-logo" />
-          <span>{record.company.name}</span>
-        </div>
-      ),
-    },
-    {
-      key: 'status',
-      title: 'Status',
-      render: (record: Product) => (
-        <div className="status-cell">
-          <span className={`status-indicator ${record.status === 'In Stock' ? 'in-stock' : 'out-of-stock'}`}>
-            {record.status}
-          </span>
-        </div>
-      ),
-    },
-    {
-      key: 'actions',
-      render: (record: Product) => (
-        <div className="actions-cell">
-          <button onClick={() => handleEditProduct(record)}>
-            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.0947 1.99892C10.9244 1.82932 10.7221 1.69516 10.4997 1.60417C10.2772 1.51318 10.0389 1.46716 9.79856 1.46879C9.55822 1.47042 9.32057 1.51965 9.09936 1.61365C8.87815 1.70764 8.67776 1.84453 8.50975 2.01642L1.64715 8.87912C1.3937 9.13258 1.21301 9.44949 1.12401 9.79671L0.542819 12.0641C0.467311 12.3586 0.735111 12.6264 1.02967 12.5508L3.29714 11.9693C3.64426 11.8802 3.96108 11.6996 4.21448 11.4462L11.0772 4.58338C11.2491 4.41545 11.386 4.2151 11.4801 3.99392C11.5741 3.77275 11.6233 3.53512 11.625 3.2948C11.6266 3.05447 11.5806 2.8162 11.4895 2.59377C11.3985 2.37134 11.2643 2.16916 11.0947 1.99892Z" fill="#AEB9E1" stroke="#AEB9E1" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button onClick={() => handleDeleteProduct(record.id)}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.1483 11.9359C11.1131 12.4611 10.6769 12.869 10.1506 12.869H3.84163C3.31534 12.869 2.87912 12.4611 2.84387 11.936L2.27734 3.49451H11.7142L11.1483 11.9359Z" fill="#AEB9E1" stroke="#AEB9E1" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M1 3.49548H13" stroke="#AEB9E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8.52789 1.3186H5.46852C5.19806 1.3186 4.93867 1.43321 4.74742 1.63721C4.55617 1.8412 4.44873 2.11788 4.44873 2.40638V3.49416H9.54768V2.40638C9.54768 2.11788 9.44024 1.8412 9.24899 1.63721C9.05775 1.43321 8.79836 1.3186 8.52789 1.3186Z" stroke="#AEB9E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      ),
-    },
-  ];
 
   return (
     <div className="products-page">

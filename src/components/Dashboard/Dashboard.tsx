@@ -1,4 +1,3 @@
-import React from 'react';
 import './Dashboard.scss';
 import RevenueGraph from './RevenueGraph';
 import TotalProfit from './TotalProfit';
