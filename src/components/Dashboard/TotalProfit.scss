@@ -1,0 +1,98 @@
+.total-profit {
+  position: relative;
+  width: 100%;
+  padding: 24px;
+  background: var(--card-background);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+
+  .total-profit-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 24px;
+
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      width: 100%;
+
+      .title-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        
+        svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        span {
+          font-family: 'Poppins', sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 14px;
+          color: #AEB9E1;
+        }
+      }
+
+      .value-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .amount {
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+          font-size: 24px;
+          color: #FFFFFF;
+        }
+
+        .change {
+          font-family: 'Poppins', sans-serif;
+          font-size: 12px;
+          font-weight: 500;
+          color: #4ADE80;
+          background: rgba(74, 222, 128, 0.1);
+          padding: 4px 8px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  .graph-container {
+    width: 100%;
+    height: 200px;
+    margin-top: 24px;
+    background: var(--card-background);
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background-color: transparent;
+
+      line {
+        opacity: 0.1;
+      }
+
+      rect {
+        transition: opacity 0.2s ease;
+        
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      text {
+        font-family: 'Inter', sans-serif;
+      }
+    }
+  }
+} 

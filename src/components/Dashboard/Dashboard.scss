@@ -1,0 +1,101 @@
+.dashboard {
+  padding: 24px;
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+
+    .stat-card {
+      width: 252px;
+      height: 130px;
+      background: var(--card-background);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .stat-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+
+        .stat-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #AEB9E1;
+        }
+
+        .stat-title {
+          color: var(--text-secondary);
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 1;
+        }
+      }
+
+      .stat-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .stat-value {
+          font-size: 24px;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+
+        .stat-change {
+          font-size: 12px;
+          font-weight: 500;
+          padding: 4px 8px;
+          border-radius: 2px;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          height: 19px;
+          
+          &.positive {
+            color: #05C168;
+            background-color: rgba(5, 193, 104, 0.2);
+
+            svg {
+              color: #14CA74;
+              transform: rotate(0deg);
+            }
+          }
+          
+          &.negative {
+            color: #FF4747;
+            background-color: rgba(255, 71, 71, 0.2);
+
+            svg {
+              color: #FF4747;
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+
+    .main-section {
+      min-width: 0;
+    }
+
+    .side-section {
+      min-width: 0;
+    }
+  }
+} 
